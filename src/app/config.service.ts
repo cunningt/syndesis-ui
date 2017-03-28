@@ -15,21 +15,12 @@ const defaults = environment.config;
 
 const defaultConfigJson = '/config.json';
 
-let instance: ConfigService = undefined;
-
 @Injectable()
 export class ConfigService {
 
   private settingsRepository: any = defaults;
 
-  constructor(private _http: Http) {
-    // TODO hmm, this should be a singleton but it isn't acting like one, let's force it...
-    if (!instance) {
-      instance = this;
-    } else {
-      this.settingsRepository = instance.getSettings();
-    }
-  }
+  constructor(private _http: Http) { }
 
   load(configJson: string = defaultConfigJson): Promise<ConfigService> {
     return this._http.get(configJson).map(res => res.json())

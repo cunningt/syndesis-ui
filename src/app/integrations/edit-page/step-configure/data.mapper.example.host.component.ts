@@ -13,8 +13,6 @@ import { MappingManagementService } from 'ipaas.data.mapper';
 
 import { DataMapperAppComponent } from 'ipaas.data.mapper';
 
-import { ConfigService } from '../../../config.service';
-
 import { CurrentFlow, FlowEvent } from '../current-flow.service';
 import { FlowPage } from '../flow-page';
 
@@ -27,7 +25,6 @@ const MAPPING_KEY = 'atlasmapping';
       <data-mapper #dataMapperComponent [cfg]="cfg"></data-mapper>
     </div>
   `,
-  providers: [ConfigService],
 })
 export class DataMapperHostComponent extends FlowPage implements OnInit, OnDestroy {
 
@@ -61,15 +58,8 @@ export class DataMapperHostComponent extends FlowPage implements OnInit, OnDestr
     public documentService: DocumentManagementService,
     public mappingService: MappingManagementService,
     public errorService: ErrorHandlerService,
-    public configService: ConfigService,
   ) {
     super(currentFlow, route, router);
-    try {
-      this.cfg.baseJavaServiceUrl = configService.getSettings('datamapper', 'baseJavaServiceUrl') || this.cfg.baseJavaServiceUrl;
-      this.cfg.baseMappingServiceUrl = configService.getSettings('datamapper', 'baseMappingServiceUrl') || this.cfg.baseMappingServiceUrl;
-    } catch (err) {
-      // run with defaults
-    }
   }
 
 

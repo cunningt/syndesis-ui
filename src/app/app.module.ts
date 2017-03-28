@@ -169,9 +169,6 @@ export function restangularProviderConfigurer(restangularProvider: any, config: 
       deps: [ConfigService, OAuthService, UserService, NgZone],
       multi: true,
     },
-    ConfigService,
-    OAuthService,
-    UserService,
   ],
   bootstrap: [AppComponent],
 })
